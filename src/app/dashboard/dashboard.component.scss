@@ -1,0 +1,16 @@
+.edit{
+    color: rgb(3, 47, 245);
+    cursor: pointer;
+}
+.delete{
+    color: red;
+    cursor: pointer;
+}
+.btn{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+.container{
+    padding: 10px;
+}

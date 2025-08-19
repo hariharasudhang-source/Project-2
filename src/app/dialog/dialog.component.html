@@ -1,0 +1,48 @@
+<!-- @if(option === 'edit' || option === 'addUser'){ -->
+@if(option === 'addUser'){
+<h2 mat-dialog-title>Add Users</h2>
+}@else if(option === 'edit') {
+<h2 mat-dialog-title>Edit</h2>
+}
+<mat-dialog-content>
+  <form [formGroup]="dynamicForm">
+    <div *ngFor="let field of keys">
+      <label>{{ field | titlecase }}</label>
+      <input type="text" [formControlName]="field" [placeholder]="'Enter ' + (field | titlecase)">
+      <div *ngIf="dynamicForm.get(field)?.invalid && dynamicForm.get(field)?.touched">
+        <span *ngIf="dynamicForm.get(field)?.errors?.['required']" class="error">
+          {{ field | titlecase }} is required.
+        </span>
+      </div>
+
+      <div *ngIf="dynamicForm.get(field)?.errors?.['backend']">
+        <span class="error">
+          {{ dynamicForm.get(field)?.errors?.['backend'] }}
+        </span>
+      </div>
+    </div>
+    @if(option === 'addUser'){
+    <button type="submit" [disabled]="dynamicForm.invalid" (click)="onSubmit('addUser')">Add Users</button>
+    }@else if(option === 'edit') {
+    <button type="submit" [disabled]="dynamicForm.invalid" (click)="onSubmit('edit')">Submit</button>
+    }
+  </form>
+</mat-dialog-content>
+@if(option !== 'delete'){
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+  }
+<!-- } -->
+
+@if(option === 'delete'){
+<mat-card [ngStyle]="{'width':'100%'}">
+  <mat-card-content>
+    <h1 [ngClass]="{'sentence':true}">Are you sure you want to delete this Product? This can not be undone.</h1>
+    <mat-dialog-actions class="btn">
+      <button mat-raised-button color="warn" (click)="deleteData()">Yes</button>
+      <button mat-raised-button mat-dialog-close style="color: black !important; ">Cancel</button>
+    </mat-dialog-actions>
+  </mat-card-content>
+</mat-card>
+}
