@@ -1,4 +1,3 @@
-<!-- @if(option === 'edit' || option === 'addUser'){ -->
 @if(option === 'addUser'){
 <h2 mat-dialog-title>Add Users</h2>
 }@else if(option === 'edit') {
@@ -33,7 +32,6 @@
     <button mat-button mat-dialog-close>Cancel</button>
   </mat-dialog-actions>
   }
-<!-- } -->
 
 @if(option === 'delete'){
 <mat-card [ngStyle]="{'width':'100%'}">

@@ -76,12 +76,10 @@ export class DialogComponent {
     this.service.addEmployee(this.formData).subscribe({
       next: (res) => {
 
-        // Send updated employee back to parent
         this.dialogRef.close('refresh');
       },
       error: (err) => {
         if (err.error.errors) {
-          // loop through backend errors
           this.errorHandling(err);
         }
       }
@@ -91,7 +89,6 @@ export class DialogComponent {
     this.service.editEmployee(this.dialogData.id, this.formData).subscribe({
       next: (res) => {
 
-        // Send updated employee back to parent
         this.dialogRef.close('refresh');
       },
       error: (err) => {
@@ -103,13 +100,11 @@ export class DialogComponent {
   }
 
   errorHandling(err:any){
-      // loop through backend errors
       Object.keys(err.error.errors).forEach(field => {
         const control = this.dynamicForm.get(field);
         console.log('field',field);
         
         if (control) {
-          // attach backend error to the form control
           control.setErrors({ backend: err.error.errors[field] });
         }
       });
