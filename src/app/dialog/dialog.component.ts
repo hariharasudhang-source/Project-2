@@ -23,9 +23,9 @@ export interface Model {
 export class DialogComponent {
   staticObj = {
     "id": null,
-  "name": null,
-  "dept": null,
-  "join_year": null,
+    "name": null,
+    "dept": null,
+    "join_year": null,
   }
   username = '';
   password = '';
@@ -34,7 +34,7 @@ export class DialogComponent {
   option!: any;
   keys: any[] = [];
   formData: any = {};
-  isAddUser!: boolean; 
+  isAddUser!: boolean;
 
   service: CommonService = inject(CommonService);
 
@@ -45,7 +45,7 @@ export class DialogComponent {
   ) {
     this.isAddUser = data.str === 'edit' ? false : true;
     this.dialogData = data.ele || this.staticObj;
-    
+
     this.option = data.str;
     this.dynamicForm = this.fb.group({});
   }
@@ -65,14 +65,14 @@ export class DialogComponent {
 
     if (this.dynamicForm.valid) {
       this.formData = this.dynamicForm.value;
-      if(option.includes('edit')){
+      if (option.includes('edit')) {
         this.editUser();
-      }else{
+      } else {
         this.addUser();
       }
     }
   }
-  addUser(){
+  addUser() {
     this.service.addEmployee(this.formData).subscribe({
       next: (res) => {
 
@@ -85,7 +85,7 @@ export class DialogComponent {
       }
     });
   }
-  editUser(){
+  editUser() {
     this.service.editEmployee(this.dialogData.id, this.formData).subscribe({
       next: (res) => {
 
@@ -109,9 +109,9 @@ export class DialogComponent {
         }
       });
   }
-  
-  deleteData(){
-    
+
+  deleteData() {
+
     this.service.deleteEmployee(this.dialogData).subscribe({
       next: (res) => {
         this.dialogRef.close();
